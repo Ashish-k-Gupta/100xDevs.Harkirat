@@ -31,9 +31,18 @@ const tasks = [
 
 app.get("/tasks", function(req, res){
 
-    for(let i = 0; i < tasks.length; i++){
-    }
-    res.status(200).json({tasks});
+    let data = JSON.stringify(tasks);
+    
+    fs.writeFile('database.txt',data, (err) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send('Internal Server Error')
+        }else{
+            // console.log(data)
+            let tasksJson = JSON.parse(data)
+            res.status(200).json({tasks: tasksJson});
+        }
+    } )
 
 })
 
