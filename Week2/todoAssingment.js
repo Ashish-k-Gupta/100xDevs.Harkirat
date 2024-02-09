@@ -2,20 +2,13 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
+const { param } = require('./redoTodo');
 const app = express();
 module.exports = app;
 app.use(express.json())
 
 
-/* let allTasks = [];
 
-class task{
-    constructor(title, description){
-        this.title = "Buy Groceries";
-        this.description = "Milk, oats, pulses, rice, cooking oil";
-    }
-}
- */
 
 const tasks = [
     {
@@ -58,20 +51,55 @@ app.get("/tasks/:id", function(req, res){
 });
 
 
-/* 
-app.post("/tasks", function (req, res){
-    const {title, description, ID} = req.body;
-    // const ID = Math.floor(Math.random() * Date.now()).toString(16);
-    const newTask = {title, description, ID}
-    tasks.push(newTask);
-    res.json(newTask);
+
+// Define route handler to create a new todo item
+app.post("/tasks", function(req, res) {
+    const newTodo = req.body; // Extract the new todo item from the request body
+
+    // Generate a random ID for the new todo item
+    const newId = Math.floor(Math.random() * Date.now()).toString(16);
+
+    // Assign the generated ID to the new todo item
+    newTodo.id = newId;
+
+    // Add the new todo item to the todos array
+    tasks.push(newTodo);
+
+    // Send 201 Created response with the ID of the created todo item in JSON format
+    res.status(201).json({ id: newId });
+});
+
+
+
+app.put("/tasks/:id", function (req, res){
+    // const id = parseInt(req.params.id);
+    const id = req.params.id;
+    const updateTodo =  req.body;
+    const todoIndex = tasks.findIndex(item => item.id === id)
+
+    if(todoIndex === -1){
+        return res.status(404).send('Todo item not found');
+    }
+
+    tasks[todoIndex] = {...tasks[todoIndex], ...updateTodo};
+
+
+    res.status(200).send('Todo item updated successfully')
+
 })
 
- */
+app.delete('/tasks/:id', function (req, res){
+    const id = req.params.id;
+    const deleteTodo = req.body;
+    const delTodoIndex = tasks.findIndex(item => item.id === id)
 
-
-
-
+        if(delTodoIndex === -1){
+            return res.status(404).send("Todo item not found");
+        }else{
+            tasks.splice(([delTodoIndex]), 1)
+            res.status(200).send('Todo task has been deleted')
+        }
+})
 
 
 
