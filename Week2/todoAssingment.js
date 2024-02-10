@@ -9,7 +9,7 @@ app.use(express.json())
 
 
 
-
+/* 
 const tasks = [
     {
         title: 'Buy Groceries',
@@ -25,7 +25,15 @@ const tasks = [
         // id: "2"
     },
 
-];
+]; */
+
+let tasks = []
+
+fs.readFile('database.txt', 'utf-8', (err, data) =>{
+    if(!err){
+        tasks = JSON.parse(data);
+    }
+});
 
 
 
@@ -73,6 +81,7 @@ app.post("/tasks", function(req, res) {
 
     // Add the new todo item to the todos array
     tasks.push(newTodo);
+    saveTaskToFile();
 
     // Send 201 Created response with the ID of the created todo item in JSON format
     res.status(201).json({ id: newId });
@@ -92,7 +101,7 @@ app.put("/tasks/:id", function (req, res){
 
     tasks[todoIndex] = {...tasks[todoIndex], ...updateTodo};
 
-
+    saveTaskToFile();
     res.status(200).send('Todo item updated successfully')
 
 })
@@ -106,9 +115,20 @@ app.delete('/tasks/:id', function (req, res){
             return res.status(404).send("Todo item not found");
         }else{
             tasks.splice(([delTodoIndex]), 1)
+            saveTaskToFile();
             res.status(200).send('Todo task has been deleted')
         }
 })
+
+function saveTaskToFile(){
+    fs.writeFile('tasks.json', JSON.stringify(tasks), (err) =>{
+        if(err){
+            console.log('Error saving tasks to file', err);
+        }else{
+            console.log('Tasks saved to file successfully');
+        }
+    });
+}
 
 
 
@@ -116,4 +136,11 @@ const PORT = 3002;
 app.listen(PORT, ()=>{
     console.log(`Server is runnin on port ${PORT}`);
 }); 
+
+process.on('SIGINT',() =>{
+    saveTaskToFile();
+    process.exit();
+})
+
+
 
