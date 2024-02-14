@@ -171,7 +171,9 @@ promisify a calback of 1 second timeout and then 2 second timeout and then 3 sec
  //   })
  // })
 
+
 // Promise chaining
+
 
  promisifyCallbacks123(1000)
    .then(function(){

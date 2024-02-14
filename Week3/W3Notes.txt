@@ -1,0 +1,39 @@
+MIDDLEWARES
+
+
+
+
+
+
+Global Catches - Helps you give the user better error messaage. If you don't use these your backend code might be visible to the enduser(client).
+                 Which you don't want to happen bacuse they can read all that code and if there's any bug or vulnerability in your code they can 
+                 manipulate your code. So to save ourselves from these hassels we use something call [Error Handling middleware]
+
+Error Handling Middleware: This is a special type of middleware functionin Express that has four arguments instead of three (`(err, req, res, next)`). 
+                            Express recognizes it as an error-handling middleware because of these four arguments.
+
+Example Below - Looks like this and goes at the end of your code.
+
+app.use(function(err, req, res, next){
+    res.json({
+        "Msg": "Sorry something is up with our server"
+    });
+});
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AUTHENTICATIONS -
+
+
+How can you do better input Validation?
+When you ask a user for input. He can send any input. For example for login if you are asking a user to create his id and password. User can just put anything into the 
+id (input box - like here[adfkljdsjgoiajfg]) and if he send that back to the server it will be an error. Also situations where the user has to create need to create a 
+strong password we see that it ask you that (password should be 8 digit, consist of numbers and alphabet charater and special charaters too.) These are the things we 
+need to validate. To valdiate these input one thing we can do is create alot of IF/ELSE statment in your code. Which will be hectic or we can just use libraries Which
+are build to made our life easy as a developer. One of those liberarires is Called ZOD.
+
+
+ZOD - It lets you validata those input from the users which they sent back to your servers.
+
