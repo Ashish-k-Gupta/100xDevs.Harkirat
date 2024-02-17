@@ -1,0 +1,50 @@
+<!-- 
+    Create a HTML page where
+    1- You can see the names of 10 People
+    2- You need to make sure you get these data from an API call
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 1st METHOD to hit the backend server using some front-end code
+
+      /*   function getAnimalData(){
+            const response  = fetch("https://fakerapi.it/api/v1/persons")
+            .then(function(response){
+                response.json()
+                .then(function(finalData){
+                    console.log(finalData)
+                })
+            })
+        } */
+
+
+        // 2nd METHOD to hit the backend server using some front-end code
+
+
+        async function getAnimalData(){
+            const response = await fetch("https://fakerapi.it/api/v1/persons");
+            const finalData = await response.json();
+            console.log(finalData);
+            document.getElementById("container").innerHTML = JSON.stringify(finalData.data);
+        }
+    </script>
+
+    <button onclick="getAnimalData()">Get Animal Data</button>
+
+    <div id="container">
+
+    </div>
+
+</body>
+</html>

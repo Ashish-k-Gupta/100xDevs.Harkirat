@@ -2,9 +2,6 @@ MIDDLEWARES
 
 
 
-
-
-
 Global Catches - Helps you give the user better error messaage. If you don't use these your backend code might be visible to the enduser(client).
                  Which you don't want to happen bacuse they can read all that code and if there's any bug or vulnerability in your code they can 
                  manipulate your code. So to save ourselves from these hassels we use something call [Error Handling middleware]
@@ -24,8 +21,7 @@ app.use(function(err, req, res, next){
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-AUTHENTICATIONS -
-
+ZOD
 
 How can you do better input Validation?
 When you ask a user for input. He can send any input. For example for login if you are asking a user to create his id and password. User can just put anything into the 
@@ -36,4 +32,109 @@ are build to made our life easy as a developer. One of those liberarires is Call
 
 
 ZOD - It lets you validata those input from the users which they sent back to your servers.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AUTHENTICATIONS -
+
+
+ As of now we know that the any user can hit your backend
+ They can just go to POSTMAN and sent a request
+ How do you ensure that this user has access to a certain resource?
+   
+
+DUMB WAY OF AUTHENTICATION - Is asking a user to send Username & Password in all the requests as HEADER
+
+
+
+
+SMART WAY OF AUTHENTICATION - 
+1-  Give the user back a token on signup/signin
+2-  Ask the user to send back the token in all future requests
+3-  When the user logout, ask the user to forget the token (or revoke it from the backend)
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Whenever you are sending a 
+GET request you send a QUERY PARAMETER you can use normal PARAMETERS too
+POST request you use BODY
+SENSITIVE INFO (like TOKENS) you use HEADERS - Cookies are basically HEADERS
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+FETCH, AUTHENTICATION AND databases
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+AUTHENTICATION
+
+let people sign up to your website. Onlly allow signed in users to see people (create a dummy people list)
+
+
+1- HASHING -   Whenever we create a login id/password to access some service. The password are store somewhere in a database. For example I have my gaming id 
+                gamer007@mail.com and password is = "myNameIsBond". Now here this password is a string but in actual database storing my password like this can 
+                create too many risk. As we know people tend to repeat their password. In a case where our database got hacked the hacker can guess password for
+                my facebook account which can create further problems. Also the changing in input for like if you add a single charcter to your password it will
+                change the hashcode by alot. So that it will make it alot difficult for a person to decode that hashcode. 
+                
+                So what hashing does now my
+                 password "myNameIsBond" will look
+                 like "1a5f0f43e3bcf23ad4e17d23b925154f0e06529b52c1c8b7fd478e8e058a5e8d"
+                 This process is only one way which means it is impossible for someone to who even go the hashcode for my password to guess my password form the 
+                 the hash string only. 
+                 Also, it important to note that this code doesn't change. So that once the hashcode is created and stored and whenver the user try to login again
+                 it can compare it to the already stored hashcode and confirm if the password he has entered is correct or not.
+                 
+
+
+
+2-  Encryption: Encryption on the other hand is goes two ways. It's like a changing your data into some gebrish format. Which means by only looking it no one be
+                be able to guess what is it. But it also has a key (that is a way to change that gebrish into the actual information). Whoever will have that key
+                will be able to DECRYPT your data. For example all the images you post on Instagram are get encryted. Let when you fetch those images the will 
+                decrypted back to their orginal format. 
+
+
+
+  
+3-  JSON WEB TOKEN -  This neither HASHING nor ENCRYPTION but you can say it's like creating a digital signature. What JSON web token does it converts your data to a long long string.
+                      The only differce is that any one can get back the original data from that WEB TOKEN. You can just put that token to a website which converts 
+                      JSON WEB TOKEN to original data, you can just get original data which was stored in it.
+                      Converstion part here is can be done by anyone.
+                      But there is a part called varification - which can be only done the by the same webservice where this JSON Web Token belongs too.
+
+                      You take a password pass it through jwt.encode it turns that password into JSON WEB TOKEN string. Now when you pass this TOKEN "String"
+                      to a jwt.verify it also check it with the password you have created for that website. If that password matches then it will let you use or
+                      not use those services.
+                      Verification means that the password stored on servers and the password stored is TOKEN "String" matches. If yes it let's you access those 
+                      services or if not it restrain you from those.
+
+
+4- LOCAL STORAGE
+
+
+
+
+How this works?
+
+Let's you have a website. A user comes to the website create a login id/password. Now your backend code convert the Password a to hashcode and store into a database.
+Also, you back also generates a JWT code for user and send it back to the user browser and there the browser stores that data into local storage. Later whenever a user
+request from his browser that JWT token stored in localStorage get sent along that request. And it keeps verifying with every request that user is login id/password and it's 
+correct user that is login. When you logout yourself from the database the browser deletes that stored JWT code from the local storage and now user can't access the 
+website without logining in again without password.
+This process repeats.
+
+*/
+
+
+
+
 
