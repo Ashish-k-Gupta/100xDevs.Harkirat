@@ -100,7 +100,7 @@ function userExists(username, password){
     // in ALL_USERS array
     // return ALL_USERS.some(user => user.username === username);
 
-    let userExists = false;
+    let     userExists = false;
     for(let i = 0; i < ALL_USERS.length; i++){
         if(ALL_USERS[i].username === username && ALL_USERS[i].password === password){
              userExists = true;
@@ -130,16 +130,32 @@ app.post("/signin", (req, res) =>{
 
 app.get("/users", (req, res) =>{
 
-    const token = req.header.authorization;
-    try{
+    const token = req.headers.authorization;
+    const decode = jwt.verify(token, jwtPassword);
+    const username = decode.username;
+
+    res.json({
+        users: ALL_USERS.filter(function(value){
+            if(value.username == username){
+                return false
+            }else{
+              return  true;
+            }
+        })
+    })
+ /*    try{
         const decode = jwt.verify(token, jwtPassword);
         const username = decode.username;
         //return a list of users other than this username
+        res.json({
+            users: ALL_USERS
+        })
+
     } catch(err){
         return res.status(403).json({
             msg: "Invalid token"
         })
-    }
+    } */
 
 })
 
