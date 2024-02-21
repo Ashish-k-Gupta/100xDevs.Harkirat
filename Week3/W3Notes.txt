@@ -85,6 +85,9 @@ let people sign up to your website. Onlly allow signed in users to see people (c
                 create too many risk. As we know people tend to repeat their password. In a case where our database got hacked the hacker can guess password for
                 my facebook account which can create further problems. Also the changing in input for like if you add a single charcter to your password it will
                 change the hashcode by alot. So that it will make it alot difficult for a person to decode that hashcode. 
+
+                Famous algorithms for hashing and encryption (AES-128, SHA-256)
+                javaScript - provides a funtion for hashing [crypto.js] {example: crypto.input("my string to encryt").sercret("Asdadaas")}
                 
                 So what hashing does now my
                  password "myNameIsBond" will look
@@ -133,6 +136,25 @@ website without logining in again without password.
 This process repeats.
 
 */
+
+
+ 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+JWT 
+
+jwt has three parts
+
+1- Generating a JWT
+2- Decoding a JWT
+3- Verifying a JWT
+
+
+JWT is encodes the data you have give to it a long string and converts into a long string. While creating that JWT token it requrires a 
+secret/password to generate that token. If someone got that secret/password than you are screwed.
+Everywhen can see what data is stored in JWT token (long-string) by using a simple JWT token. But not everyone can verify the data that is
+store in that token. Decoding can be done by anyone but the verification requires the secret that was used while creating that token. 
+
 
 
 
