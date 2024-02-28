@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+  
+<body>
+   <!--  <div>
+    <input id="principal" placeholder="Principal Amount">
+    <input id="rate" placeholder="Rate of Interest">
+    <input id="time" placeholder="Time period">
+    </div>
+  <div>
+    <p id="showResult">Amount: </p>
+  </div>
+    <div>
+      <button id="Calculate">Calculate</button>
+    </div> -->
+
+    <div>
+        <input id="principal" placeholder="Principal Amount">
+        <input id="rate" placeholder="Rate of Interest">
+        <input id="time" placeholder="Time period">
+      </div>
+      <div>
+        <p id="showResult">Amount: </p>
+      </div>
+      <div>
+        <button id="Calculate">Calculate</button>
+      </div>
+    
+      <script>
+        document.getElementById("Calculate").addEventListener("click", function() {
+          // p = principal amount
+          // r = rate of interest
+          // t = time period
+          let p = document.getElementById("principal").value;
+          let r = document.getElementById("rate").value;
+          let t = document.getElementById("time").value;
+    
+          // Construct the URL with query parameters
+          let url = `http://localhost:3000/answer?p=${p}&r=${r}&t=${t}`;
+    
+          fetch(url, {
+            method: 'GET'
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Display the result
+            document.getElementById("showResult").innerHTML = `Result: ${data}`;
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+        });
+      </script>
+
+    <script>
+ 
+        document.getElementById("Calculate").addEventListener("click", function() {
+        
+        // p = principal amount
+        // r = rate of interest
+        // t = time period
+        
+        let p = document.getElementById("principal").value;
+        let r = document.getElementById("rate").value;
+        let t = document.getElementById("time").value;
+        
+        
+        let url = `localhost:3000/answer?p=${p}&r=${r}&t=${t}}`;
+        
+        fetch(url, {
+            method: 'GET', 
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Network response was not OK')
+            }
+            return response.json();
+        })
+        
+        .then(data=>{
+            document.getElementById("showResult").innerHTML = `Result: ${data}`;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+        
+        
+        
+        }) 
+        
+            
+          
+          
+        </script>
+        
+
+</body>
+</html>

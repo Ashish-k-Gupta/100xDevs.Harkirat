@@ -1,0 +1,42 @@
+DEBOUNCING & THROATTLING
+
+[GeekforGeeks - Debouncing is a programming practice used to ensure that time-consuming tasks do not fire so often, that it stalls the performance of the web page. In other words, it limits the rate at which a function gets invoked. Debouncing in JavaScript is a practice used to improve browser performance.]
+
+
+THROATTLING: Throttling limits the number of times a function is executed over a certain time period. It ensures that the function is called at a controlled, steady rate, regardless of how frequently the event triggering the function occurs.
+
+
+for example whenever you go to amazon's webiste and start typing something in the searchbar. It starts showing you
+some suggestion. Based on your text (ie. if you type letter 'K' in the searchbar it will show you some product that they have and their name starts with "K"). That happens because based on data you have type in the serchbar it sents
+a backend request and their it search for related keywords and sends back data back  to the frontend. 
+
+But these requests are expensive in a sense. You don't want to send multiple requests to the server in very short span 
+of time like this. You want the user to type something more in the searchbar and then want that request to sent to the server.
+
+So let's say if the user stop typing for 100 milliseconds then send a request. otherwise let the user keep typing and 
+we will wait untill the user stop typing for a 100 milliseconds. That way it reduce the number of request we have sent to the backend. 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                            CHATGPT- ANSWER ON DIFFERENCE BETWEEN BOTH OF THEM
+
+Throttling and debouncing are two techniques used in JavaScript to optimize the performance of functions that are repeatedly called, especially in response to user events like scrolling, resizing, or typing. Both techniques aim to limit the number of times a function gets executed, but they do so in slightly different ways:
+
+    Throttling:
+        Throttling limits the rate at which a function can be called. It ensures that the function is not invoked more than once in a specified time interval, even if the event that triggers it fires multiple times during that interval.
+
+        With throttling, the function will be called at regular intervals, and any additional calls made during the interval will be ignored until the interval expires.
+
+        Throttling guarantees that the function will be executed regularly, providing a controlled flow of execution.
+        Example use cases include scroll events, where you want to limit the frequency of processing as the user scrolls.
+
+    Debouncing:
+        Debouncing delays the execution of a function until after a certain amount of time has passed since the last invocation of the function.
+
+        It is typically used to ensure that a function is only called after a pause in the triggering event, such as when the user stops typing or resizing the window.
+
+        If the event continues to fire within the debounce interval, the timer resets and starts counting down again.
+        Debouncing prevents a function from being called too frequently, particularly in scenarios where rapid event triggering may lead to performance issues.
+          
+        Example use cases include search boxes or autocomplete features, where you want to wait for the user to finish typing before triggering a search request.
+
+In summary, while both throttling and debouncing are techniques used to optimize function execution, throttling limits the rate of execution, while debouncing delays execution until a certain pause occurs between event triggers. The choice between throttling and debouncing depends on the specific requirements of the application and the behavior desired for the user experience.
