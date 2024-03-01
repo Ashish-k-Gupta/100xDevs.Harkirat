@@ -40,3 +40,23 @@ Throttling and debouncing are two techniques used in JavaScript to optimize the 
         Example use cases include search boxes or autocomplete features, where you want to wait for the user to finish typing before triggering a search request.
 
 In summary, while both throttling and debouncing are techniques used to optimize function execution, throttling limits the rate of execution, while debouncing delays execution until a certain pause occurs between event triggers. The choice between throttling and debouncing depends on the specific requirements of the application and the behavior desired for the user experience.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+What does REACT do?
+    REACT actully calculate the differece between states changes.
+
+What does REACT DOM do?
+    REACT DOM actuall tells the REACT to how to make the all changes that have taken place in the state.
+    Basically it tell REACT to this how you add/remove/update/ things to the DOM.
+
+What does REACT NATIVE do?
+    React native tells the REACT that this how you create/update/delete DOMs from the REACT NATIVE APPLICATIONS.
+
+
+
+
+

@@ -7,56 +7,79 @@
 </head>
 <body>
 
-    <script>
-
-        let globalId = 1;
-        function markAsDone(id){
-                const task = document.getElementById(id)
-                task.children[2].innerHTML = "Done!"
-        }
-
-        function createChild(title, description, id){
-            const child = document.createElement("div")
-            const firstGrandChild = document.createElement('div');
-            firstGrandChild.innerHTML = title;
-            const secondGrandChild = document.createElement('div');
-            secondGrandChild.innerHTML = description;
-            const thirdGrandChild = document.createElement('button')
-            thirdGrandChild.innerHTML = "Mark Done"
-            thirdGrandChild.setAttribute('onclick', `markAsDone(${id})`);
-
-
-            child.appendChild(firstGrandChild); 
-            child.appendChild(secondGrandChild); 
-            child.appendChild(thirdGrandChild); 
-            child.setAttribute("id", id)
-            return child;
-        }
-
-
-
-        function addTask(){
-            const title = document.getElementById("title").value
-            const description = document.getElementById("description").value
-            const parent = document.getElementById('container');
-
-
-            parent.appendChild(createChild(title, description, globalId++));
-            // const outerDiv = document.createElement("div");
-            // outerDiv.innerHTML = title;
-            // document.getElementById('container').appendChild(outerDiv)
-            // originalDiv.append(title, discription, )
-        }
-
-
-    </script>
-<!-- <div> -->
+ 
     <input id="title" placeholder="Enter title"> <br><br>
     <input id="description" placeholder="Enter discription"> <br><br>
     <button onclick="addTask()">Add Todo</button>
     <div id="container"></div>
-<!-- </div> -->
 
+
+
+
+
+<script>
+
+    /*         let globalId = 1;
+            function markAsDone(id){
+                    const task = document.getElementById(id)
+                    task.children[2].innerHTML = "Done!"
+            } */
+    
+            function createChild(title, description, id){
+                const child = document.createElement("div")
+                const firstGrandChild = document.createElement('div');
+                firstGrandChild.innerHTML = title;
+                const secondGrandChild = document.createElement('div');
+                secondGrandChild.innerHTML = description;
+                const thirdGrandChild = document.createElement('button')
+                thirdGrandChild.innerHTML = "Mark Done"
+                thirdGrandChild.setAttribute('onclick', `markAsDone(${id})`);
+    
+    
+                child.appendChild(firstGrandChild); 
+                child.appendChild(secondGrandChild); 
+                child.appendChild(thirdGrandChild); 
+                child.setAttribute("id", id)
+                return child;
+            }
+    
+    
+    
+            function addTask(){
+                const title = document.getElementById("title").value
+                const description = document.getElementById("description").value
+                const parent = document.getElementById('container');
+                parent.appendChild(createChild(title, description, globalId++));
+            }
+    
+            // state will be always be an array
+            // Every element of state whold have a title, ,secription and id
+    
+    
+            function updateDomAccToState(state){
+                const parent = document.getElementById("container")    
+                    parent.innerHTML = "";
+                for(let i = 0; i < state.length; i++){
+                        const child = createChild(state[i].title, state[i].descriptio, state[i].id);
+                        parent.appendChild(child);
+                }
+            }  
+    
+            updateDomAccToState([
+                {
+                    title: "go to gym", 
+                    description: "go to gym 5 days a week", 
+                    id: 1
+                }, 
+
+                {
+                    title: "Go to office", 
+                    descriptio: " go to office 9 to 5", 
+                    id: 2
+                }
+            ]);
+    
+        </script>
    
 </body>
 
