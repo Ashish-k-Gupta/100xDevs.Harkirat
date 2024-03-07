@@ -32,7 +32,7 @@ app.post("/todo", async (req, res) =>{
   await todo.create({
     title: createPayload.title, 
     description: createPayload.description,
-    complete: false;g
+    complete: false
   })
 
   res.status(200).json({
@@ -52,7 +52,7 @@ app.get("/todos", async (req, res) =>{
 })
 
 
-app.put("/completed", (req, res) =>{
+app.put("/completed", async (req, res) =>{
   const updatePayLoad = req.body;
   const parsedPayLoad = updateTodo.safeParse(updatePayLoad);
   if(!parsedPayLoad.success){
@@ -60,15 +60,21 @@ app.put("/completed", (req, res) =>{
       msg: "You have sent the wrong input"
     })
   }
+  await todo.update({
+    _id: req.body.id
+  }, {
+    completed: true
+  }
+  )
+  res.json({
+    msg: "Todo marked as completed"
+  })
 
 })
-
-
 
 const PORT = 3000;
-app.listen(PORT, ()=>{
-    `Server is running on PORT ${PORT}`
-})
-
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`);
+});
 
 // zod
