@@ -1,0 +1,8 @@
+node_modules/
+week4\todoPractice\Backend\package-lock.json
+week4\todoPractice\Backend\package.json
+week4\todoPractice\Backend\node_modules
+week4\todoPractice\Todo_Frontend\src
+week4\todoPractice\Todo_Frontend\package-lock.json
+week4\todoPractice\Todo_Frontend\package.json
+week4\todoPractice\.gitignore
