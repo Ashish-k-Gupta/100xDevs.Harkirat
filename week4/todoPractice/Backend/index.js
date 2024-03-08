@@ -2,9 +2,15 @@
 
 const express = require('express')
 const app = express()
-app.use(express.json());
 const { createTodo, updateTodo } = require("./types");
 const { todo } = require("./db")
+const cors = require("cors")
+
+app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:5173"
+}
+));
 // const { json } = require('body-parser')
 
  
@@ -44,12 +50,22 @@ app.post("/todo", async (req, res) =>{
 
 
 app.get("/todos", async (req, res) =>{
-  const todos = await todo.find({});
+  try{
 
-  res.json({
-    msg: "Todo Created"
-  })
-})
+    const todos = await todo.find({});
+    
+    res.json({
+      // todos: []
+      todos: todos
+    })
+  }
+   catch (error) {
+    console.error("Error fetching todos:", error);
+    res.status(500).json({
+        error: "Server error while fetching todos"
+    });
+  }
+  });
 
 
 app.put("/completed", async (req, res) =>{
