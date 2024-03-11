@@ -1,0 +1,55 @@
+React component Return;
+
+1- Create a react app that has a 
+ 1.1 Header component that takes a title as a prop and renders it inside a div
+  1.2The Top level app component renders two headers
+
+  SOLUTIONS
+
+  
+function App() {
+  
+  return ( 
+    
+    <React.Fragment>
+    <Header title="Ashish1"></Header>
+    <Header title="Ashish2"></Header>
+    <Header title="Ashish3"></Header>
+    <Header title="Ashish4"></Header>
+    </React.Fragment>
+    )
+}
+  
+  ++++++++++++++++++++++++OR++++++++++++++++++++++++
+
+  
+function App() {
+  
+  return ( 
+    
+    <>
+    <Header title="Ashish1"></Header>
+    <Header title="Ashish2"></Header>
+    <Header title="Ashish3"></Header>
+    <Header title="Ashish4"></Header>
+    </>
+    )
+}
+
+  ++++++++++++++++++++++++OR++++++++++++++++++++++++
+
+
+function App() {
+  
+  return ( 
+    
+    <div>
+    <Header title="Ashish1"></Header>
+    <Header title="Ashish2"></Header>
+    <Header title="Ashish3"></Header>
+    <Header title="Ashish4"></Header>
+    </div>
+    )
+}
+  
+
