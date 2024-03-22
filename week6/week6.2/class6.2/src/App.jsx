@@ -33,7 +33,7 @@ function Todo({title, description}){
 
 function App(){
 
-  const [id, setId] = useState(1);
+  const [selectedId, setId] = useState(1);
   const handleButtonClick = (newId) =>{
     setId(newId);
   }
@@ -45,7 +45,8 @@ return(
       <button onClick={() => handleButtonClick(3)}>3</button>
       <button onClick={() => handleButtonClick(4)}>4</button>
       <button onClick={() => handleButtonClick(5)}>5</button>
-    <Todo id={id}/>
+
+    <Todo id={selectedId}/>
   </div>
 )
 }
@@ -57,7 +58,7 @@ function Todo({id}){
     .then(function(response){
       setTodo(response.data.todo)
     })
-  },[])
+  },[id])
 
 return <div>
   <h1>{todo.title}</h1>
