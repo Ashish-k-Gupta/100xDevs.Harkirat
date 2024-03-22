@@ -30,7 +30,7 @@ function Todo({title, description}){
  */
 
 
-
+/* 
 function App(){
 
   const [selectedId, setId] = useState(1);
@@ -67,5 +67,38 @@ return <div>
 
 }
 
+
+export default App
+ */
+
+
+/* 
+## useMemo
+It's a mildly DSA concept
+it means remembering some output given an input and not computing it again.
+*/
+
+function App(){
+
+  const [sum, setSum] = useState(0);
+
+  function result(){
+    let value = document.getElementById("number").value;
+    let num = parseInt(value);
+    let sum = 0
+    for(let i = 0; i <= num; i++){
+        sum += i
+    }
+    setSum(sum)
+  }
+return (
+  <div>
+    <input id="number" type="text" />
+    <h3>Sum is {sum}</h3>
+    <button onClick={result}>Calculate Sum</button>
+  </div>
+
+)
+}
 
 export default App
