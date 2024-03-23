@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 /* 
@@ -114,7 +114,7 @@ export default App
  */
 
 function App(){
-  const [counter, setCounter] = useState(0);
+  /* const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState(1);
 
   let count = 0;
@@ -123,7 +123,7 @@ function App(){
   }
 
   return <div>
-    <input onChange={function(e){
+   { <input onChange={function(e){
       setInputValue(e.target.value);
     }} placeholder={"Find sum from 1 to n"}></input>
     <br />
@@ -131,7 +131,37 @@ function App(){
     <br/>
     <button onClick={() => {
       setCounter(counter + 1);
-    }}>Counter({counter})</button>
+    }}>Counter({counter})</button> }*/
+
+
+     const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
+
+    let count = useMemo(() =>{
+      console.log("Memo got called")
+      let finalCount = 0;
+      for(let i = 0; i <= inputValue; i++){
+        finalCount = finalCount + i;
+      }
+      return finalCount;
+
+    }, [inputValue])
+   
+
+
+
+return <div>
+<input onChange ={(e) => 
+setInputValue(e.target.value)
+} placeholder = {"The sum of 1 to n is"}></input><br/>
+
+Sum from 1 to {inputValue} is {count}
+<br/>
+<button onClick={(count) =>{
+  setCounter(counter + 1);
+}}>Counter: {counter}</button>
+
+
   </div>
 }
 
