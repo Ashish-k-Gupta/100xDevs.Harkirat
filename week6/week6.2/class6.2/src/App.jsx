@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, memo } from 'react'
 import './App.css'
 import axios from 'axios'
 /* 
@@ -113,8 +113,9 @@ export default App
 
  */
 
+/* 
 function App(){
-  /* const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState(1);
 
   let count = 0;
@@ -131,7 +132,7 @@ function App(){
     <br/>
     <button onClick={() => {
       setCounter(counter + 1);
-    }}>Counter({counter})</button> }*/
+    }}>Counter({counter})</button> }
 
 
      const [counter, setCounter] = useState(0);
@@ -142,7 +143,7 @@ function App(){
       let finalCount = 0;
       for(let i = 0; i <= inputValue; i++){
         finalCount = finalCount + i;
-      }
+      } 
       return finalCount;
 
     }, [inputValue])
@@ -163,6 +164,53 @@ Sum from 1 to {inputValue} is {count}
 
 
   </div>
+}
+
+export default App;
+*/
+
+/* 
+function App(){
+  const [count, setCount] = useState(0)
+
+function logSomething(){
+  console.log("child Clicked")
+}
+
+return <div>
+  <ButtonComponent inputFunction  ={logSomething}/>
+  <button onClick={() =>{
+    setCount(count + 1);
+  }}> Click me {count}</button>
+</div>
+}
+
+const ButtonComponent = memo(({logSomething}) =>{
+  console.log("child render")
+
+  return <div>
+    <button onClick={inputFunction}>Button Clicked</button>
+  </div>
+  
+});
+
+export  default App;
+ */
+
+
+function App(){
+  const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+      axios.get("")
+          .then((res) => {
+            setTodos(res.data.todos)
+          })
+    }, [])
+
+    return <div>
+      {todos}
+    </div>
 }
 
 export default App;

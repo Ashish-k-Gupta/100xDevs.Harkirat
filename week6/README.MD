@@ -142,3 +142,129 @@ export default App
 
 ```javascript
 
+// One way to do it.
+
+import React, { Component, useState } from 'react'
+import './App.css'
+
+
+function App(){
+  return <div>
+  <CardWrapper innerComponent = {<TextComponent />}/>
+  <CardWrapper innerComponent = {<TextComponent />}/>
+  </div>
+
+}
+
+function CardWrapper({innerComponent}){
+  return <div style={{border: "2px Solid Red", padding: 20}}>
+  {innerComponent}
+  </div>
+}
+
+
+function TextComponent(){
+  return <div>
+    Hi There!!
+  </div>
+}
+
+
+export default App
+
+
+
+
+// ANOTHER WAY TO DO IT
+
+import React, { Component, useState } from 'react'
+import './App.css'
+
+
+function App(){
+  return <div>
+  <CardWrapper>
+    <div>Hi There!</div>
+  </CardWrapper>
+  <CardWrapper>
+    <div>Hello There!</div>
+  </CardWrapper>
+  <CardWrapper>
+    <div>What's There!</div>
+  </CardWrapper>
+  </div>
+
+}
+
+function CardWrapper({children}) {
+  return <div style={{
+    border: "2px Solid Red",
+    padding: "20px",
+    margin: "10px"
+    }}>
+
+  {children}
+
+  </div>
+}
+
+
+function TextComponent(){
+  return <div>
+    Hi There!!
+  </div>
+}
+
+
+export default App
+```
+
+
+## Hooks
+
+These functions that starts with USE are called hooks
+
+Hooks in React are functions that allow you to "hook into"
+React state and lifecycle features from function components.
+
+
+```javascript
+
+
+
+
+
+
+
+```
+## useMemo
+
+It's a mildly DSA concept
+it means remembering some output given an input and not computing it again.
+
+```javascript
+
+function App(){
+  const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
+
+    let count = 0;
+    for(let i = 0; i <= inputValue; i++){
+      count = count + i;
+    }
+
+
+
+return <div>
+<input onChange ={(e) => 
+setInputValue(e.target.value)
+} placeholder = {"The sum of 1 to n is"}></input><br/>
+
+Sum from 1 to {inputValue} is {count}
+<br/>
+<button onClick={(count) =>{
+  setCounter({counter});
+}}>Counter: {counter}</button>
+
+</div>
+}  
