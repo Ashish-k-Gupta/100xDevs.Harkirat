@@ -1,102 +1,49 @@
-/* import './App.css'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import {Dashboard} from "./components/dashboard"
-import {Landing} from "./components/landing"
+/* 
+PROP DRILLING
+Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. Context lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props. */
 
-function App() {
-  return (
-    <div>
+import { useContext, useState } from "react";
+import { CountContext } from "./context";
 
-    
-
-      <BrowserRouter>
-        <Appbar/>
-
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/" element={<Landing/>} />
-        </Routes>
-      </BrowserRouter>
-
-    </div>
-     
-    )
-
-  function Appbar(){
-  const navigate = useNavigate();
-
-    return (
-        <div style={{background: "Blue", color: "white"}}>
-
-
-    <button style={{padding: 5, margin: 5}} onClick={()=>{
-      window.location.reload()
-    }}>Refresh</button>
-
-    <button style={{padding: 5, margin: 5}} onClick={()=>{
-      navigate("/dashboard");
-    }}>Dashboard</button>
-
-    <button style={{padding: 5, margin: 5}} onClick={() =>{
-      navigate("/");  
-    }}>Landing</button>
-
-
-    </div>
-
-    )
-
-  }
-}
-
-export default App
- */
-
-import React, { Suspense } from "react";
-import {BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
-const Landing = React.lazy( () =>  import("./components/landing"));
-const Dashboard = React.lazy( () => import("./components/dashboard"));
-
+// Wrap anyone that wants to use the teleported alue inside a provider
 function App(){
-  return (
-    <div>
-      <BrowserRouter>
-        <Appbar/>
-        <Routes>
-          <Route path="/dashboard" element = {<Suspense fallback={"Loading..."}> <Dashboard/></Suspense>} />
-          <Route path="/" element={<Suspense fallback={"Loading..."}> <Landing/> </Suspense>}/>
-        </Routes>
-      </BrowserRouter>
-      </div>
+  const [count, setCount] = useState(0);
 
+  return(
+    <div>
+      <CountContext.Provider value={count}>
+      <Count setCount={setCount}/>
+      </CountContext.Provider>
+    </div>
   )
 
-  
-  function Appbar(){
-    const navigate = useNavigate();
-  
-      return (
-          <div style={{background: "Blue", color: "white"}}>
-  
-  
-      <button style={{padding: 5, margin: 5}} onClick={()=>{
-        window.location.reload()
-      }}>Refresh</button>
-  
-      <button style={{padding: 5, margin: 5}} onClick={()=>{
-        navigate("/dashboard");
-      }}>Dashboard</button>
-  
-      <button style={{padding: 5, margin: 5}} onClick={() =>{
-        navigate("/");  
-      }}>Landing</button>
-  
-  
-      </div>
-  
-      )
-  
-    }
+}
+
+function Count({ setCount}){
+  return <div>
+    <CountRenderer/>
+   <Buttons setCount={setCount}/>
+  </div>
+}
+
+function CountRenderer(){
+  const count = useContext(CountContext);
+  return <div>
+      {count}
+  </div>
+}
+
+
+function Buttons({setCount}){
+  const count = useContext(CountContext);
+   return <div>
+    <button onClick={() => {
+        setCount(count + 1)
+    }}>Increase</button>
+    <button onClick={() => {
+      setCount(count - 1)
+    }}>Decrease</button>
+   </div>
 }
 
 export default App
